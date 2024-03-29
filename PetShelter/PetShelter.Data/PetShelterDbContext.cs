@@ -1,13 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using PetShelter.Data.Entities;
 using PetShelter.Shared.Enums;
 using PetShelter.Shared.Security;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PetShelter.Data
 {
@@ -15,26 +11,26 @@ namespace PetShelter.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Vaccine> Vaccines { get; set; }
-        public DbSet<Shelter> Shelters { get; set; }
-        public DbSet<Role> Roles { get; set; }
         public DbSet<PetVaccine> PetVaccines { get; set; }
+        public DbSet<Breed> Breeds { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Shelter> Shelters { get; set; }
         public DbSet<PetType> PetTypes { get; set; }
         public DbSet<Pet> Pets { get; set; }
-        public DbSet<Location> Locations { get; set; }
-        public DbSet<Breed> Breeds { get; set; }
-        public DbSet<BaseEntity> BaseEntities { get; set; }
-
-
 
         public PetShelterDbContext(DbContextOptions<PetShelterDbContext> options) : base(options)
         {
 
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+
             optionsBuilder.UseLazyLoadingProxies();
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Breed>()
@@ -59,12 +55,12 @@ namespace PetShelter.Data
                 .WithOne(a => a.Shelter)
                 .HasForeignKey<Location>(c => c.ShelterId);
 
-            base.OnModelCreating(modelBuilder);
-
             foreach (var role in Enum.GetValues(typeof(UserRole)).Cast<UserRole>())
             {
-                modelBuilder.Entity <Role>().HasData(new Role { Id = (int)role, Name = role.ToString() });
-                modelBuilder.Entity<User>()
+                modelBuilder.Entity<Role>().HasData(new Role { Id = (int)role, Name = role.ToString() });
+            }
+
+            modelBuilder.Entity<User>()
                 .HasData(new User
                 {
                     Id = 1,
@@ -74,13 +70,6 @@ namespace PetShelter.Data
                     LastName = "User",
                     Password = PasswordHasher.HashPassword("string")
                 });
-
-            }
-           
         }
-            
-    
     }
-            
 }
-

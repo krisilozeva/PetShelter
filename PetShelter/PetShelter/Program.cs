@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PetShelter;
+using PetShelter.Data;
 using PetShelter.Shared.Security.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -9,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
 builder.Services.AddAutoMapper(m => m.AddProfile(new AutoMapperConfiguration()));
 IJwtSettings settings = builder.Configuration.GetSection(typeof(JwtSettings).Name).Get<JwtSettings>();
 
@@ -52,6 +56,10 @@ builder.Services.AddAuthentication(cfg => cfg.DefaultScheme = JwtBearerDefaults.
                 });
 
 builder.Services.AddSingleton(settings);
+builder.Services.AddDbContext<PetShelterDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration["ConnectionStrings: DefaultConnection"]);
+});
 
 
 var app = builder.Build();
