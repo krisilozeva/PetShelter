@@ -70,13 +70,13 @@ namespace PetShelter.Data.Repos
             }
             catch (SqlException ex)
             {
-                
+                // Here we can save these errors in some logs or telemetry
                 await Console.Out.WriteLineAsync($"The system threw an sql exception trying to create {nameof(model)}: {ex.Message}");
 
             }
             catch (Exception ex)
             {
-                
+                // Here we can save these errors in some logs or telemetry
                 await Console.Out.WriteLineAsync($"The system threw an non-sql exception trying to create {nameof(model)}: {ex.Message}");
 
             }
@@ -97,13 +97,13 @@ namespace PetShelter.Data.Repos
             }
             catch (SqlException ex)
             {
-                
+                // Here we can save these errors in some logs or telemetry
                 await Console.Out.WriteLineAsync($"The system threw an sql exception trying to update {nameof(model)}: {ex.Message}");
 
             }
             catch (Exception ex)
             {
-                
+                // Here we can save these errors in some logs or telemetry
                 await Console.Out.WriteLineAsync($"The system threw an non-sql exception trying to update {nameof(model)}: {ex.Message}");
 
             }
@@ -145,7 +145,7 @@ namespace PetShelter.Data.Repos
             }
         }
 
-        public Task<bool> ExistsByIdAsync(int id)
+        public Task<bool> ExistByIdAsync(int id)
         {
             return _dbSet.AnyAsync(e => e.Id == id);
         }

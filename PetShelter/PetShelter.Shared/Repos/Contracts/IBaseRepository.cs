@@ -10,12 +10,12 @@ namespace PetShelter.Shared.Repos.Contracts
     public interface IBaseRepository<TModel> where TModel : BaseModel
     {
         Task<IEnumerable<TModel>> GetAllAsync();
-        Task<TModel> GetAsync(int id);
+        Task<TModel> GetByIdAsync(int id);
         Task CreateAsync(TModel model);
         Task UpdateAsync(TModel model);
         Task SaveAsync (TModel model);
         Task DeleteAsync(int id);
         Task <bool> ExistByIdAsync(int id);
-        Task<IEnumerable<TModel>> GetWithPaginationAsync(int pageSize, int pageNumber);
+        Task<IEnumerable<TModel>> GetWithPaginatioAsync(int pageSize, int pageNumber);
     }
 }

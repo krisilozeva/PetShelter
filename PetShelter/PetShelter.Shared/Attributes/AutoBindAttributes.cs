@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PetShelter.Shared.Attributes
 {
-    public class AutoBindAttributes : Attribute
+    public class AutoBindAttribute : Attribute
     {
     }
 }
