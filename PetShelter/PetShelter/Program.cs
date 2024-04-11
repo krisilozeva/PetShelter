@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PetShelter;
 using PetShelter.Data;
+using PetShelter.Data.Repos;
 using PetShelter.Shared.Security.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -12,8 +13,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDbContext<PetShelterDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
+});
 
+builder.Services.AutoBind(typeof(PetService).Assembly);
+builder.Services.AutoBind(typeof(PetRepository).Assembly);
 builder.Services.AddAutoMapper(m => m.AddProfile(new AutoMapperConfiguration()));
+
 IJwtSettings settings = builder.Configuration.GetSection(typeof(JwtSettings).Name).Get<JwtSettings>();
 
 builder.Services.AddAuthentication(cfg => cfg.DefaultScheme = JwtBearerDefaults.AuthenticationScheme)
@@ -56,14 +64,15 @@ builder.Services.AddAuthentication(cfg => cfg.DefaultScheme = JwtBearerDefaults.
                 });
 
 builder.Services.AddSingleton(settings);
-builder.Services.AddDbContext<PetShelterDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration["ConnectionStrings: DefaultConnection"]);
-});
-
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<PetShelterDbContext>();
+    // Automatically update database
+    context.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -85,4 +94,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-

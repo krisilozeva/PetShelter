@@ -145,7 +145,7 @@ namespace PetShelter.Data.Repos
             }
         }
 
-        public Task<bool> ExistByIdAsync(int id)
+        public Task<bool> ExistsByIdAsync(int id)
         {
             return _dbSet.AnyAsync(e => e.Id == id);
         }
