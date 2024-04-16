@@ -5,8 +5,10 @@ using PetShelter;
 using PetShelter.Data;
 using PetShelter.Data.Repos;
 using PetShelter.Shared.Security.Contracts;
+using PetShelter.Shared.Extensions;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using PetShelter.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
