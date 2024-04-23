@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using PetShelter.Shared.Attributes;
 using PetShelter.Shared.Security.Contracts;
+using PetShelter.Shared.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;

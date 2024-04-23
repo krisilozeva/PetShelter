@@ -1,4 +1,4 @@
-﻿using PetShelter.Services.Services.Contracts;
+﻿using PetShelter.Shared.Services.Contracts;
 using PetShelter.Shared.Attributes;
 using PetShelter.Shared.Dtos;
 using PetShelter.Shared.Repos.Contracts;

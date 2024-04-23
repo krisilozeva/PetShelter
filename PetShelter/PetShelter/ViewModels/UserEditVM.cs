@@ -1,4 +1,6 @@
-﻿namespace PetShelter.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PetShelter.ViewModels
 {
     public class UserEditVM : BaseVM
     {

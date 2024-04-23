@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetShelter.Services.Services.Contracts
+namespace PetShelter.Shared.Services.Contracts
 {
-    public interface IPetService : IBaseCrudService<PetDto, IPetRepository>
+    public interface IPetTypeService : IBaseCrudService<PetTypeDto, IPetTypeRepository>
     {
     }
 }
