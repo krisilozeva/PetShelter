@@ -2,7 +2,7 @@
 
 namespace PetShelter.ViewModels
 {
-    public class PetDetailsVM
+    public class PetDetailsVM : BaseVM
     {
         public string Name { get; set; }
 

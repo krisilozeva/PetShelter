@@ -1,6 +1,6 @@
 ﻿namespace PetShelter.ViewModels
 {
-    public class LocationDetailsVM
+    public class LocationDetailsVM : BaseVM
     {
         public string City { get; set; }
         public string Address { get; set; }
