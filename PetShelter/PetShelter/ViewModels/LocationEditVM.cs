@@ -5,7 +5,7 @@ namespace PetShelter.ViewModels
     public class LocationEditVM : BaseVM
     {
         [Required]
-        public string Name { get; set; }
+        public string City { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]
