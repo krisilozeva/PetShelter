@@ -1,4 +1,66 @@
-﻿@page
-@model PetShelter.Views.Pet.DetailsModel
+﻿@model PetShelter.Web.ViewModels.PetDetailsVM
+
 @{
+    ViewBag.Title = "Details";
 }
+
+<h2>Details</h2>
+<div>
+    <h4>Products</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.Age)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAdopted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsAdopted)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsEuthenized)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsEuthenized)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PetTypeId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PetTypeId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BreedId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BreedId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShelterId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShelterId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "List")
+</p>

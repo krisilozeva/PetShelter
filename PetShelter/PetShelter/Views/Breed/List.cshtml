@@ -15,7 +15,7 @@
              @Html.DisplayNameFor(model => model.Size)
          </th>
          <th>
-             @Html.DisplayNameFor(model => model.Size)
+            @Html.DisplayNameFor(model => model.Pets)
          </th>
          <th>Actions</th>
      </tr>
@@ -29,7 +29,7 @@
                     @Html.DisplayNameFor(modelItem => item.Size)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(modelItem => item.Count)
+                    @Html.DisplayNameFor(modelItem => item.Pets.Count)
                 </td>
                 <td>
                     @Html.ActionLink("Edit","Edit",new{id = item.Id}) |

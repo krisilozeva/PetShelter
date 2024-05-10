@@ -16,23 +16,23 @@ namespace PetShelter.ViewModels
 
         public int PetTypeId { get; set; }
 
-        public virtual PetType PetType { get; set; }
+        public  PetTypeDetailsVM PetType { get; set; }
 
         public int BreedId { get; set; }
 
-        public virtual Breed Breed { get; set; }
+        public  BreedDetailsVM Breed { get; set; }
 
         public int? AdopterId { get; set; }
 
-        public virtual User Adopter { get; set; }
+        public UserDetailsVM Adopter { get; set; }
 
         public int? GiverId { get; set; }
 
-        public virtual User Giver { get; set; }
+        public UserDetailsVM Giver { get; set; }
 
         public int? ShelterId { get; set; }
 
-        public virtual Shelter Shelter { get; set; }
+        public  ShelterDetailsVM Shelter { get; set; }
 
         public virtual List<PetVaccine> PetVaccines { get; set; }
         public List<PetDetailsVM> Pets { get; set; }
