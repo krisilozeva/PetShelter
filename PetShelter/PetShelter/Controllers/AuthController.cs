@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
+using PetShelter.Shared;
 using PetShelter.Shared.Enums;
 using PetShelter.Shared.Security;
 using PetShelter.Shared.Services.Contracts;
@@ -43,7 +43,7 @@ namespace PetShelter.Controllers
                 return Forbid();
             }
 
-            if (!await this.userService.CanUserLoginAsync(model.Username, model.Passwod))
+            if (!await this.userService.CanUserLoginAsync(model.Username, model.Password))
             {
                 return BadRequest(Constants.InvalidCredentials);
             }

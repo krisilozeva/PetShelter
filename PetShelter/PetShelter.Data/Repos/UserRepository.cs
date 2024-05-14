@@ -15,5 +15,15 @@ namespace PetShelter.Data.Repos
     public class UserRepository : BaseRepository<User, UserDto>, IUserRepository
     {
         public UserRepository(PetShelterDbContext context, IMapper mapper) : base(context, mapper) { }
+
+        public Task<bool> CanUserLoginAsync()
+        {
+            _dbSet.Where(x => x.Username == null).ToListAsync()
+                (x => x.Password).ToListAsync()
+        }
+
     }
+
 }
+
+

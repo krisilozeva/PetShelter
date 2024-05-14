@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PetShelter.Data.Entities;
 using PetShelter.Shared.Attributes;
 using PetShelter.Shared.Dtos;
@@ -15,5 +16,14 @@ namespace PetShelter.Data.Repos
     public class LocationRepository : BaseRepository<Location, LocationDto>, ILocationRepository
     {
         public LocationRepository(PetShelterDbContext context, IMapper mapper) : base(context, mapper) { }
+
+        public async Task<IEnumerable<LocationDto>> GetAllActiveAsync()
+        {
+            
+            var listOfLocations = await _dbSet.Where(x => x.ShelterId == null).ToListAsync();
+            var listOfDTOs = MapToEnumerableOfModel(listOfLocations);
+            return listOfDTOs;
+            
+        }
     }
 }

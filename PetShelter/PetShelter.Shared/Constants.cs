@@ -12,6 +12,7 @@ namespace PetShelter.Shared
         public static readonly string InvalidPagination = "Invalid page. \n";
         public static readonly string InvalidId = "Invalid Id. \n";
         public static readonly string InvalidCredentials = "Invalid Credentials. \n";
+        public static readonly string UserAlredyExists = "User alredy exists. \n";
 
 
     }

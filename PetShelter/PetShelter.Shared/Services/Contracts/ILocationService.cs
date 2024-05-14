@@ -10,5 +10,6 @@ namespace PetShelter.Shared.Services.Contracts
 {
     public interface ILocationService : IBaseCrudService<LocationDto, ILocationRepository>
     {
+        Task<IEnumerable<LocationDto>> GetAllActiveAsync();
     }
 }
