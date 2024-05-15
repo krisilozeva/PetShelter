@@ -1,4 +1,4 @@
-﻿@model PetShelter.Web.ViewModels.PetVaccineDetailsVM
+﻿@model PetShelter.Web.ViewModels.RoleDetailsVM
 
 @{
     ViewBag.Title = "Delete";
@@ -14,18 +14,11 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.PetId)
+                @Html.DisplayNameFor(model => model.Name)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.PetId)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.VaccineId)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.VaccineId)
+                @Html.DisplayFor(model => model.Name)
             </dd>
 
         </dl>
