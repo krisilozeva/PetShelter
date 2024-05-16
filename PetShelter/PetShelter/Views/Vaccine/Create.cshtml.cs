@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PetShelter.Views.PetVaccine
+namespace PetShelter.Views.Vaccine
 {
-    public class EditModel : PageModel
+    public class CreateModel : PageModel
     {
         public void OnGet()
         {

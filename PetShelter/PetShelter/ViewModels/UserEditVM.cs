@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace PetShelter.ViewModels
 {
@@ -21,6 +22,11 @@ namespace PetShelter.ViewModels
 
         [Required]
         public int? ShelterId { get; set; }
+
+        public IEnumerable<SelectListItem> RoleList { get; set; }
+        public IEnumerable<SelectListItem> ShelterList { get; set; }
+
+
 
 
     }
