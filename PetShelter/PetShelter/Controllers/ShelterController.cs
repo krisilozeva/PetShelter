@@ -23,7 +23,7 @@ namespace PetShelter.Controllers
             var editVM = new ShelterEditVM
             {
                 LocationList = (await _locationsService.GetAllActiveAsync())
-                .Select(x = new SelectListItem($"{x.Country},{x.City},{x.Address}", x.Id.ToString()))
+                .Select(x => new SelectListItem($"{x.Country},{x.City},{x.Address}", x.Id.ToString()))
             };
             return editVM;
         }
