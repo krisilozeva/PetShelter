@@ -18,8 +18,9 @@ namespace PetShelter.Data.Repos
 
         public Task<bool> CanUserLoginAsync()
         {
-            _dbSet.Where(x => x.Username == null).ToListAsync()
-                (x => x.Password).ToListAsync()
+            //_dbSet.Where(x => x.Username == null).ToListAsync()
+            //    (x => x.Password).ToListAsync()
+            throw new NotImplementedException();
         }
 
     }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PetShelter.Web.ViewModels.PetDetailsVM>
+﻿@model IEnumerable<PetShelter.ViewModels.PetDetailsVM>
 
 @{
     ViewBag.Title = "Index";
@@ -23,7 +23,7 @@
             @Html.DisplayNameFor(model => model.IsAdopted)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsEuthenized)
+            @Html.DisplayNameFor(model => model.IsEuthanized)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PetTypeId)
@@ -52,7 +52,7 @@
                 @Html.DisplayNameFor(modelItem => item.IsAdopted)
             </td>
             <td>
-                @Html.DisplayNameFor(modelItem => item.IsEuthenized)
+                @Html.DisplayNameFor(modelItem => item.IsEuthanized)
             </td>
             <td>
                 @Html.DisplayNameFor(modelItem => item.PetTypeId)

@@ -1,4 +1,4 @@
-﻿@model PetShelter.Web.ViewModels.RoleEditVM
+﻿@model PetShelter.ViewModels.RoleEditVM
 
 @{
     ViewBag.Title = "Edit";
@@ -8,13 +8,13 @@
 <h2>Edit</h2>
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToke()
+    @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         <h4>Product</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddeFor(model => model.Id)
+        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })

@@ -45,6 +45,35 @@ namespace PetShelter.Tests.Repos
             //Assert
             Assert.That(result, Is.EqualTo(model.Object));
         }
+
+        public void MapToEntity_ValidModel_ReturnsMappedEntity()
+        {
+            // Arrange
+            var entity = new Mock<T>();
+            var model = new Mock<TModel>();
+            mockMapper.Setup(m => m.Map<T>(model.Object)).Returns(entity.Object);
+
+            // Act
+            var result = repository.MapToEntity(model.Object);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(entity.Object));
+        }
+        //public void MapToEnumerableOfModel_WhenCalled_ReturnsMappedEnumerable()
+        //{
+        //    // Arrange
+        //    var entity = new List<T>();
+        //    var model = new List<TModel>();
+
+        //    mockMapper.Setup(m => m.Map<IEnumerable<TModel>>(entity)).Returns(model);
+
+
+        //    // Act
+        //    var result = repository.MapToEnumerableOfModel(entity);
+
+        //    // Assert
+        //    Assert.That(result, Is.EqualTo);
+        //}
     }
 
 
