@@ -37,7 +37,7 @@ namespace PetShelter.Tests.Repos
             //Arange
             var entity = new Mock<T>();
             var model = new Mock<TModel>();
-            mockMapper.Setup(m => m.Map <TModel>(entity.Object)).Returns(model.Object);
+            mockMapper.Setup(m => m.Map<TModel>(entity.Object)).Returns(model.Object);
 
             //Act
             var result = repository.MapToModel(entity.Object);
@@ -45,7 +45,7 @@ namespace PetShelter.Tests.Repos
             //Assert
             Assert.That(result, Is.EqualTo(model.Object));
         }
-
+        [Test]
         public void MapToEntity_ValidModel_ReturnsMappedEntity()
         {
             // Arrange
@@ -59,22 +59,42 @@ namespace PetShelter.Tests.Repos
             // Assert
             Assert.That(result, Is.EqualTo(entity.Object));
         }
-        //public void MapToEnumerableOfModel_WhenCalled_ReturnsMappedEnumerable()
-        //{
-        //    // Arrange
-        //    var entity = new List<T>();
-        //    var model = new List<TModel>();
+        [Test]
+        public void MapToEnumerableOfModel_WhenCalled_ReturnsMappedEnumerable()
+        {
+            // Arrange
+            var entity = new Mock<List<T>>();
+            var model = new Mock<List<TModel>>();
+            mockMapper.Setup(m => m.Map<IEnumerable<TModel>>(entity.Object)).Returns(model.Object);
 
-        //    mockMapper.Setup(m => m.Map<IEnumerable<TModel>>(entity)).Returns(model);
 
+            // Act
+            var result = repository.MapToEnumerableOfModel(entity.Object);
 
-        //    // Act
-        //    var result = repository.MapToEnumerableOfModel(entity);
+            // Assert
+            Assert.That(result, Is.EqualTo(model.Object));
+            
+        }
+        [Test]
+        public async Task GetAllAsync_ReturnsMappedModels()
+        {
+            // Arrange
+            var entity = new Mock<List<T>>();
+            var model = new Mock<List<TModel>>();
 
-        //    // Assert
-        //    Assert.That(result, Is.EqualTo);
-        //}
+            mockDbSet.Setup(async s => await s.ToListAsync()).Returns(Task<entity.Object>);
+
+            mockMapper.Setup(m => m.Map<IEnumerable<TModel>>(entity.Object))
+                .Returns(model.Object);
+            
+            // Act
+            var result = await repository.GetAllAsync();
+
+            // Assert
+            Assert.That(result, Is.EqualTo(model.Object));
+        }
     }
+
 
 
 }
