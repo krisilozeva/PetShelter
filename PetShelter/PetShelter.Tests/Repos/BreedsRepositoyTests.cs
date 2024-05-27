@@ -6,15 +6,6 @@ namespace PetShelter.Tests.Repos
 {
     public class BreedsRepositoryTests:BaseRepositoryTests<BreedsRepository,Breed,BreedDto>
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [Test]
-        public void Test1()
-        {
-            Assert.Pass();
-        }
+        
     }
 }
