@@ -47,24 +47,24 @@ namespace PetShelter.Controllers
             {
                 return BadRequest(Constants.InvalidCredentials);
             }
-            //await LoginUser(model.Username);
+            await LoginUser(model.Username);
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
-        //private async Task LoginUser(string username)
-        //{
-        //    var user = await this.userService.GetByUsernameAsync(username);
-        //    var claims = new[]
-        //    {
-        //        new Claim(ClaimTypes.Name, user.Username),
-        //        new Claim(ClaimTpes.Role, user.Role.Name)
-        //    };
-        //    var identity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
-        //    var principal = new ClaimsPrincipal(identity);
+        private async Task LoginUser(string username)
+        {
+            var user = await this.userService.GetByUsernameAsync(username);
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTpes.Role, user.Role.Name)
+            };
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
 
-        //    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-        //}
+        }
         [HttpGet]
         public IActionResult Register()
         {
@@ -74,26 +74,26 @@ namespace PetShelter.Controllers
 
         public async Task<IActionResult> Register([FromForm] RegisterVM userCreateModel)
         {
-            //string loggedUsername = User.FindFirst(ClaimTypes.Name)?.Value;
+            string loggedUsername = User.FindFirst(ClaimTypes.Name)?.Value;
 
-            //if (loggedUsername != null) 
-            //{
-            //    return Forbid();
-            //}
+            if (loggedUsername != null)
+            {
+                return Forbid();
+            }
 
-            //if(await this.usersService.GetByUsernameAsync(userCreateModel.Username) != default) 
-            //{
-            //    return BadRequest(Constants.UserAlredyExists)
-            //}
+            if (await this.usersService.GetByUsernameAsync(userCreateModel.Username) != default)
+            {
+                return BadRequest(Constants.UserAlredyExists)
+            }
 
-            //var hashedPassword = PasswordHasher.HashPassword(userCreateModel.Password);
-            //userCreateModel.Password = hashedPassword;
+            var hashedPassword = PasswordHasher.HashPassword(userCreateModel.Password);
+            userCreateModel.Password = hashedPassword;
 
-            //var userDto = this.mapper.Map<UserDto>(userCreateModel);
-            //userDto.RoleId = (await roleService.GetByNameIfExistsAsync(UserRole.User.ToString()))?.Id; 
-            //await this.usersService.SaveAsync(userDto);
+            var userDto = this.mapper.Map<UserDto>(userCreateModel);
+            userDto.RoleId = (await roleService.GetByNameIfExistsAsync(UserRole.User.ToString()))?.Id;
+            await this.usersService.SaveAsync(userDto);
 
-            //await LoginUser(userDto.Username);
+            await LoginUser(userDto.Username);
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
