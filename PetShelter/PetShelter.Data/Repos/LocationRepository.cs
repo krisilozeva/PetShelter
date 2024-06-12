@@ -19,11 +19,7 @@ namespace PetShelter.Data.Repos
 
         public async Task<IEnumerable<LocationDto>> GetAllActiveAsync()
         {
-            
-            var listOfLocations = await _dbSet.Where(x => x.ShelterId == null).ToListAsync();
-            var listOfDTOs = MapToEnumerableOfModel(listOfLocations);
-            return listOfDTOs;
-            
+            return MapToEnumerableOfModel(await _dbSet.Where(x => x.ShelterId == null).ToListAsync());
         }
     }
 }

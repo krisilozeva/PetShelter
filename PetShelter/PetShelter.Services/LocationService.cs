@@ -17,9 +17,7 @@ namespace PetShelter.Services
         public LocationService(ILocationRepository repository) : base(repository) { }
 
         public Task<IEnumerable<LocationDto>> GetAllActiveAsync()
-        {
-            return _repository.GetAllActiveAsync();
-
-        }
+            => this._repository.GetAllActiveAsync();
     }
+}
 }

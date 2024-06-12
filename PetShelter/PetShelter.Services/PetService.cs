@@ -13,6 +13,20 @@ namespace PetShelter.Services
     [AutoBind]
     public class PetService : BaseCrudService<PetDto, IPetRepository>, IPetService
     {
-        public PetService(IPetRepository repository) : base(repository) { }
+        public PetService(IPetRepository repository) : base(repository)
+        {
+
+        }
+
+        public Task AdoptPetAsync(int userId, int petId)
+        {
+            return _repository.AdoptPetAsync(userId, petId);
+
+        }
+
+        public Task GivePetAsync(int userId, int shelterId, PetDto pet)
+        {
+            return _repository.GivePetAsync(userId, shelterId, pet);
+
+        }
     }
-}

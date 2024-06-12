@@ -13,6 +13,14 @@ namespace PetShelter.Services
     [AutoBind]
     public class RoleService : BaseCrudService<RoleDto, IRoleRepository>, IRoleService
     {
-        public RoleService(IRoleRepository repository) : base(repository) { }
+        public RoleService(IRoleRepository repository) : base(repository)
+        {
+
+        }
+
+        public Task<RoleDto?> GetByNameIfExistsAsync(string name)
+        {
+            return _repository.GetByNameIfExistsAsync(name);
+
+        }
     }
-}

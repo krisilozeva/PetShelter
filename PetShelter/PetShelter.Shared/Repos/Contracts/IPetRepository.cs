@@ -9,5 +9,7 @@ namespace PetShelter.Shared.Repos.Contracts
 {
     public interface IPetRepository : IBaseRepository<PetDto>
     {
+        Task AdoptPetAsync(int userId, int petId);
+        Task GivePetAsync(int userId, int shelterId, PetDto pet);
     }
 }
