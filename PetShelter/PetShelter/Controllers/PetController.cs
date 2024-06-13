@@ -10,6 +10,8 @@ using PetShelter.Shared.Services.Contracts;
 using PetShelter.ViewModels;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
+using PetShelter.Shared;
+using PetShelter.Data.Entities;
 
 namespace PetShelter.Controllers
 {
@@ -23,9 +25,10 @@ namespace PetShelter.Controllers
         private readonly IShelterService _shelterService;
         private readonly IBreedsService _breedService;
         private readonly IUserService _userService;
+        private readonly IVaccineService _vaccineService;
 
 
-        public PetController(IPetService service, IMapper mapper, IPetService petService, IPetTypeService petTypeService, IBreedService breedService, IShelterService shelterService, IUserService userService) : base(service, mapper)
+        public PetController(IPetService service, IMapper mapper, IPetService petService, IPetTypeService petTypeService, IBreedsService breedService, IShelterService shelterService, IUserService userService, IVaccineService vaccineService) : base(service, mapper)
 
         {
 
@@ -37,6 +40,7 @@ namespace PetShelter.Controllers
 
             _userService = userService;
 
+            _vaccineService = vaccineService;
         }
 
         protected override async Task<PetEditVM> PrePopulateVMAsync(PetEditVM editVM)
@@ -98,7 +102,51 @@ namespace PetShelter.Controllers
             return await List();
 
         }
+        [HttpGet]
+        public virtual async Task<IActionResult> AdoptPet(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest(Constants.InvalidId);
+            }
+            string loggedUsername = User.FindFirst(ClaimTypes.Name)?.Value;
+            var model = await this._service.GetByIdIfExistsAsync(id.Value);
+            var user = await this._userService.GetByUsernameAsync(loggedUsername);
+
+            if (model == default)
+            {
+                return BadRequest(Constants.InvalidId);
+            }
+            await this._service.AdoptPetAsync(user.Id, id.Value);
+
+            return await List();
+        }
+
+        [HttpGet]
+        public virtual async Task<IActionResult> VaccinatePet(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest(Constants.InvalidId);
+            }
+            var model = await this._service.GetByIdIfExistsAsync(id.Value);
+            if (model == default)
+            {
+                return BadRequest(Constants.InvalidId);
+            }
+            var vaccinatedPet = new VaccinatePetVM();
+            vaccinatedPet.PetId = id.Value;
+            vaccinatedPet.VaccineList = (await _vaccinesService.GetAllAsync())
+                .Select(x => new SelectListItem($"{x.Name}", x.Id.ToString()));
+            return View(vaccinatedPet);
+        }
+        [HttpPost]
+        public virtual async Task<IActionResult> VaccinatePet(int id, VaccinatePetVM editVM)
+        {
+
+            await this._service.VaccinatePetAsync(editVM.PetId, editVM.VaccineId);
+            return await List();
+        }
 
     }
-
 }

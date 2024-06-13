@@ -35,13 +35,14 @@ namespace PetShelter.Data.Repos
             pet.GiverId = userId;
             await SaveAsync(pet);
         }
-        public async Task VaccinatePetAsync(int vaccineId, int petId)
+        public async Task VaccinatePetAsync(int petId, int vaccineId)
         {
-            var petVaccine = new PetVaccineDto();
-            petVaccine.PetId = petId;
-            petVaccine.VaccineId = vaccineId;
-            await _petVaccineRepository.SaveAsync(petVaccine);
+
+            var pv = new PetVaccineDto();
+            pv.PetId = petId;
+            pv.VaccineId = vaccineId;
+            await _petVaccineRepository.SaveAsync(pv);
         }
+
     }
 }
-

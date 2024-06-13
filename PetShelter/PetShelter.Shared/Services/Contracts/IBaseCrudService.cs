@@ -16,6 +16,8 @@ namespace PetShelter.Shared.Services.Contracts
         Task SaveAsync(TModel model);
         Task DeleteAsync(int id);
         Task<IEnumerable<TModel>> GetWithPaginationAsync(int pageSize,int pageNumber);
+        Task<IEnumerable<TModel>> GetAllAsync();
+
         Task<bool> ExistsByIdAsync(int id);
     }
 }

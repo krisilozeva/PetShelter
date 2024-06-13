@@ -1,9 +1,25 @@
-﻿@model IEnumerable<PetShelter.ViewModels.PetDetailsVM>
+﻿@using PetShelter.Shared.Enums
+@using System.Security.Claims
+@model IEnumerable<PetShelter.ViewModels.PetDetailsVM>
 
 @{
     ViewBag.Title = "Index";
 }
+<h2>Index</h2>
+<p>
+    @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Employee.ToString() ||
 
+    Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Admin.ToString())
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+    else if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.User.ToString())
+    {
+        @Html.ActionLink("Give Pet", "GivePet")
+    }
+
+
+</p>
 <h2>Index</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -28,6 +44,7 @@
         <th>
             @Html.DisplayNameFor(model => model.PetTypeId)
         </th>
+       
         <th>
             @Html.DisplayNameFor(model => model.BreedId)
         </th>
@@ -67,6 +84,8 @@
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("Adopt Pet", "AdoptPet", new { id = item.Id })|
+                @Html.ActionLink("Vaccinate Pet", "VaccinatePet", new { petId = item.Id })|
             </td>
         </tr>
     }
