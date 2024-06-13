@@ -20,4 +20,4 @@ namespace PetShelter.Services
             => this._repository.GetAllActiveAsync();
     }
 }
-}
+

@@ -83,7 +83,7 @@ namespace PetShelter.Controllers
 
             if (await this.usersService.GetByUsernameAsync(userCreateModel.Username) != default)
             {
-                return BadRequest(Constants.UserAlredyExists)
+                return BadRequest(Constants.UserAlredyExists);
             }
 
             var hashedPassword = PasswordHasher.HashPassword(userCreateModel.Password);

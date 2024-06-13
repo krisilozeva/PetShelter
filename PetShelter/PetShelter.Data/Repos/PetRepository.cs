@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using PetShelter.Data.Entities;
-using PetShelter.Data.Repose;
+using PetShelter.Data.Repos;
 using PetShelter.Shared.Attributes;
 using PetShelter.Shared.Dtos;
 using PetShelter.Shared.Repos.Contracts;
@@ -15,13 +15,15 @@ namespace PetShelter.Data.Repos
     [AutoBind]
     public class PetRepository : BaseRepository<Pet, PetDto>, IPetRepository
     {
-        public PetRepository(PetShelterDbContext context, IMapper mapper) : base(context, mapper)
+        private readonly IPetVaccineRepository _petVaccineRepository;
+        public PetRepository(PetShelterDbContext context, IMapper mapper, IPetVaccineRepository petVaccineRepository) : base(context, mapper)
         {
+            _petVaccineRepository = petVaccineRepository;
         }
 
         public async Task AdoptPetAsync(int userId, int petId)
         {
-            var pet = await GetByIdIfExistsAsync(petId);
+            var pet = await GetByIdAsync(petId);
             pet.AdopterId = userId;
             pet.IsAdopted = true;
             await SaveAsync(pet);
@@ -32,6 +34,13 @@ namespace PetShelter.Data.Repos
             pet.ShelterId = shelterId;
             pet.GiverId = userId;
             await SaveAsync(pet);
+        }
+        public async Task VaccinatePetAsync(int vaccineId, int petId)
+        {
+            var petVaccine = new PetVaccineDto();
+            petVaccine.PetId = petId;
+            petVaccine.VaccineId = vaccineId;
+            await _petVaccineRepository.SaveAsync(petVaccine);
         }
     }
 }
