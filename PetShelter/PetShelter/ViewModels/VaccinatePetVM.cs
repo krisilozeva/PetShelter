@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections;
 
 namespace PetShelter.ViewModels
 {
@@ -8,6 +9,6 @@ namespace PetShelter.ViewModels
 
         public int VaccineId { get; set; }
 
-        public IEnumerable VaccineList { get; set; }
+        public IEnumerable<SelectListItem> VaccineList { get; set; }
     }
 }

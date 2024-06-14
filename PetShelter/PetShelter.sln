@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShelter.Data", "PetShelt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShelter.Services", "PetShelter.Services\PetShelter.Services.csproj", "{31156B6B-F976-45E5-A6F4-36D58C06E336}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShelter.Tests", "PetShelter.Tests\PetShelter.Tests.csproj", "{610BC166-1944-423F-BF21-FA425AD40384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShelter.Tests", "PetShelter.Tests\PetShelter.Tests.csproj", "{610BC166-1944-423F-BF21-FA425AD40384}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -13,16 +13,20 @@ namespace PetShelter.Services
     [AutoBind]
     public class UserService : BaseCrudService<UserDto, IUserRepository>, IUserService
     {
-        public UserService(IUserRepository repository) : base(repository) { }
+        public UserService(IUserRepository repository) : base(repository)
+        {
+
+        }
 
         public Task<bool> CanUserLoginAsync(string username, string password)
         {
-            return _repository.CanUserLoginAsync();
+            return _repository.CanUserLoginAsync(username, password);
         }
 
-        public Task GetByUsernameAsync(string username)
+        public Task<UserDto> GetByUsernameAsync(string username)
         {
-            throw new NotImplementedException();
+            return _repository.GetByUsernameAsync(username);
         }
+
     }
 }

@@ -76,13 +76,13 @@ namespace PetShelter.Test.Service
                 VaccineId = 0,
                 PetId = 4
             };
-            _petVaccineRepositoryMock.Setup(s => s.GetByIdAsync(It.Is<int>(x => x.Equals(petVaccineId))))
+            _petVaccineRepositoryMock.Setup(s => s.GetByIdIfExistsAsync(It.Is<int>(x => x.Equals(petVaccineId))))
                 .ReturnsAsync(petvaccineDto);
             //Act
             var userResult = await _service.GetByIdIfExistsAsync(petVaccineId);
 
             //Assert
-            _petVaccineRepositoryMock.Verify(x => x.GetByIdAsync(petVaccineId), Times.Once);
+            _petVaccineRepositoryMock.Verify(x => x.GetByIdIfExistsAsync(petVaccineId), Times.Once);
             Assert.That(userResult == petvaccineDto);
         }
 
@@ -92,14 +92,14 @@ namespace PetShelter.Test.Service
         public async Task WhenGetByAsync_WithInvalidBreedId_ThenReturnDefault(int petVaccineId)
         {
             var petVaccine = (PetVaccineDto)default;
-            _petVaccineRepositoryMock.Setup(s => s.GetByIdAsync(It.Is<int>(x => x.Equals(petVaccineId))))
+            _petVaccineRepositoryMock.Setup(s => s.GetByIdIfExistsAsync(It.Is<int>(x => x.Equals(petVaccineId))))
                 .ReturnsAsync(petVaccine);
 
             //Act
             var userResult = await _service.GetByIdIfExistsAsync(petVaccineId);
 
             //Assert
-            _petVaccineRepositoryMock.Verify(x => x.GetByIdAsync(petVaccineId), Times.Once);
+            _petVaccineRepositoryMock.Verify(x => x.GetByIdIfExistsAsync(petVaccineId), Times.Once);
             Assert.That(userResult == petVaccine);
 
         }

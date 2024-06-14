@@ -16,14 +16,16 @@ namespace PetShelter.Data.Repos
     public class PetRepository : BaseRepository<Pet, PetDto>, IPetRepository
     {
         private readonly IPetVaccineRepository _petVaccineRepository;
-        public PetRepository(PetShelterDbContext context, IMapper mapper, IPetVaccineRepository petVaccineRepository) : base(context, mapper)
+        private readonly IVaccineRepository _vaccinesRepository;
+        public PetRepository(PetShelterDbContext context, IMapper mapper, IPetVaccineRepository petVaccineRepository, IVaccineRepository vaccineRepository) : base(context, mapper)
         {
             _petVaccineRepository = petVaccineRepository;
+            _vaccinesRepository = vaccineRepository;
         }
 
         public async Task AdoptPetAsync(int userId, int petId)
         {
-            var pet = await GetByIdAsync(petId);
+            var pet = await GetByIdIfExistsAsync(petId);
             pet.AdopterId = userId;
             pet.IsAdopted = true;
             await SaveAsync(pet);
@@ -38,11 +40,10 @@ namespace PetShelter.Data.Repos
         public async Task VaccinatePetAsync(int petId, int vaccineId)
         {
 
-            var pv = new PetVaccineDto();
-            pv.PetId = petId;
-            pv.VaccineId = vaccineId;
-            await _petVaccineRepository.SaveAsync(pv);
+            var petVaccine = new PetVaccineDto();
+            petVaccine.PetId = petId;
+            petVaccine.VaccineId = vaccineId;
+            await _petVaccineRepository.SaveAsync(petVaccine);
         }
-
     }
 }

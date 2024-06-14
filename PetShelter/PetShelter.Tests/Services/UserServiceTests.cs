@@ -85,13 +85,13 @@ namespace PetShelter.Test.Service
                 RoleId = 2,
                 ShelterId = 3
             };
-            _userRepositoryMock.Setup(s => s.GetByIdAsync(It.Is<int>(x => x.Equals(userId))))
+            _userRepositoryMock.Setup(s => s.GetByIdIfExistsAsync(It.Is<int>(x => x.Equals(userId))))
                 .ReturnsAsync(userDto);
             //Act
             var userResult = await _service.GetByIdIfExistsAsync(userId);
 
             //Assert
-            _userRepositoryMock.Verify(x => x.GetByIdAsync(userId), Times.Once);
+            _userRepositoryMock.Verify(x => x.GetByIdIfExistsAsync(userId), Times.Once);
             Assert.That(userResult == userDto);
         }
 
@@ -101,14 +101,14 @@ namespace PetShelter.Test.Service
         public async Task WhenGetByAsync_WithInvalidBreedId_ThenReturnDefault(int userId)
         {
             var user = (UserDto)default;
-            _userRepositoryMock.Setup(s => s.GetByIdAsync(It.Is<int>(x => x.Equals(userId))))
+            _userRepositoryMock.Setup(s => s.GetByIdIfExistsAsync(It.Is<int>(x => x.Equals(userId))))
                 .ReturnsAsync(user);
 
             //Act
             var userResult = await _service.GetByIdIfExistsAsync(userId);
 
             //Assert
-            _userRepositoryMock.Verify(x => x.GetByIdAsync(userId), Times.Once);
+            _userRepositoryMock.Verify(x => x.GetByIdIfExistsAsync(userId), Times.Once);
             Assert.That(userResult == user);
 
         }

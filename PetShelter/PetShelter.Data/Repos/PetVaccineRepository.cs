@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace PetShelter.Data.Repos
 {
+    [AutoBind]
     public class PetVaccineRepository : BaseRepository<PetVaccine, PetVaccineDto>, IPetVaccineRepository
     {
         public PetVaccineRepository(PetShelterDbContext context, IMapper mapper) : base(context, mapper)

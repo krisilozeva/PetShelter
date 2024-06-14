@@ -1,4 +1,5 @@
 ﻿using Moq;
+using NUnit.Framework;
 using PetShelter.Data.Entities;
 using PetShelter.Services;
 using PetShelter.Shared.Dtos;
@@ -27,7 +28,7 @@ namespace PetShelter.Test.Service
             //Arrange
             var vaccineDto = new VaccineDto()
             {
-                Name = "Obezparizitqvane",
+                Name = "Obezparizitiawane",
                 Description = "Painless injection"
 
             };
@@ -73,16 +74,16 @@ namespace PetShelter.Test.Service
             //Arrange
             var vaccineDto = new VaccineDto()
             {
-                Name = "Obezparizitqvane",
+                Name = "Obezparizitiawane",
                 Description = "Painless injection"
             };
-            _vaccineRepositoryMock.Setup(s => s.GetByIdAsync(It.Is<int>(x => x.Equals(vaccineId))))
+            _vaccineRepositoryMock.Setup(s => s.GetByIdIfExistsAsync(It.Is<int>(x => x.Equals(vaccineId))))
                 .ReturnsAsync(vaccineDto);
             //Act
             var userResult = await _service.GetByIdIfExistsAsync(vaccineId);
 
             //Assert
-            _vaccineRepositoryMock.Verify(x => x.GetByIdAsync(vaccineId), Times.Once);
+            _vaccineRepositoryMock.Verify(x => x.GetByIdIfExistsAsync(vaccineId), Times.Once);
             Assert.That(userResult == vaccineDto);
         }
 
@@ -92,14 +93,14 @@ namespace PetShelter.Test.Service
         public async Task WhenGetByAsync_WithInvalidBreedId_ThenReturnDefault(int vaccineId)
         {
             var vaccine = (VaccineDto)default;
-            _vaccineRepositoryMock.Setup(s => s.GetByIdAsync(It.Is<int>(x => x.Equals(vaccineId))))
+            _vaccineRepositoryMock.Setup(s => s.GetByIdIfExistsAsync(It.Is<int>(x => x.Equals(vaccineId))))
                 .ReturnsAsync(vaccine);
 
             //Act
             var userResult = await _service.GetByIdIfExistsAsync(vaccineId);
 
             //Assert
-            _vaccineRepositoryMock.Verify(x => x.GetByIdAsync(vaccineId), Times.Once);
+            _vaccineRepositoryMock.Verify(x => x.GetByIdIfExistsAsync(vaccineId), Times.Once);
             Assert.That(userResult == vaccine);
 
         }
@@ -110,9 +111,8 @@ namespace PetShelter.Test.Service
             //Arrange
             var vaccineDto = new VaccineDto
             {
-                Name = "Obezparizitqvane",
+                Name = "Obezparizitiawane",
                 Description = "Painless injection"
-
             };
             _vaccineRepositoryMock.Setup(s => s.SaveAsync(It.Is<VaccineDto>(x => x.Equals(vaccineDto))))
                .Verifiable();

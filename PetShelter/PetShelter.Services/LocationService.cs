@@ -14,10 +14,13 @@ namespace PetShelter.Services
     [AutoBind]
     public class LocationService : BaseCrudService<LocationDto, ILocationRepository>, ILocationService
     {
-        public LocationService(ILocationRepository repository) : base(repository) { }
+        public LocationService(ILocationRepository repository) : base(repository) 
+        { 
+        }
 
         public Task<IEnumerable<LocationDto>> GetAllActiveAsync()
             => this._repository.GetAllActiveAsync();
     }
 }
+
 

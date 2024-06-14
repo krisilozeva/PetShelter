@@ -10,26 +10,29 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using PetShelter.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using EntityFrameworkCore.UseRowNumberForPaging;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AutoBind(typeof(PetService).Assembly);
+//builder.Services.AutoBind(typeof(PetsService)Assembly);
+builder.Services.AutoBind(typeof(PetRepository).Assembly);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<PetShelterDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"],
+        r => r.UseRowNumberForPaging());
 });
 
-builder.Services.AutoBind(typeof(PetService).Assembly);
-builder.Services.AutoBind(typeof(PetRepository).Assembly);
 builder.Services.AddAutoMapper(m => m.AddProfile(new AutoMapperConfiguration()));
 
-IJwtSettings settings = builder.Configuration.GetSection(typeof(JwtSettings).Name).Get<JwtSettings>();
-
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-
-builder.Services.AddSingleton(settings);
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+   .AddCookie();
 
 var app = builder.Build();
 
@@ -60,3 +63,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+

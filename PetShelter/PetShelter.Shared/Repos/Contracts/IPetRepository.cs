@@ -11,5 +11,6 @@ namespace PetShelter.Shared.Repos.Contracts
     {
         Task AdoptPetAsync(int userId, int petId);
         Task GivePetAsync(int userId, int shelterId, PetDto pet);
+        Task VaccinatePetAsync(int vaccineId, int shelterId);
     }
 }

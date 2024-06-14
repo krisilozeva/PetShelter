@@ -92,14 +92,14 @@ namespace PetShelter.Test.Service
                 ShelterId = 1
             };
 
-            _petRepositoryMock.Setup(x => x.GetByIdAsync(It.Is<int>(x => x.Equals(petId))))
+            _petRepositoryMock.Setup(x => x.GetByIdIfExistsAsync(It.Is<int>(x => x.Equals(petId))))
                 .ReturnsAsync(petDto);
 
             //Act
             var userResult = await _service.GetByIdIfExistsAsync(petId);
 
             //Assart
-            _petRepositoryMock.Verify(x => x.GetByIdAsync(petId), Times.Once);
+            _petRepositoryMock.Verify(x => x.GetByIdIfExistsAsync(petId), Times.Once);
             Assert.That(userResult == petDto);
         }
 
@@ -111,14 +111,14 @@ namespace PetShelter.Test.Service
             //Arrange
             var pet = (PetDto)default;
 
-            _petRepositoryMock.Setup(s => s.GetByIdAsync(It.Is<int>(x => x.Equals(petId))))
+            _petRepositoryMock.Setup(s => s.GetByIdIfExistsAsync(It.Is<int>(x => x.Equals(petId))))
                 .ReturnsAsync(pet);
 
             //Act
             var userResult = await _service.GetByIdIfExistsAsync(petId);
 
             //Assart
-            _petRepositoryMock.Verify(x => x.GetByIdAsync(petId), Times.Once);
+            _petRepositoryMock.Verify(x => x.GetByIdIfExistsAsync(petId), Times.Once);
             Assert.That(userResult == pet);
         }
 

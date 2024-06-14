@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShelter.Shared;
+using PetShelter.Shared.Dtos;
 using PetShelter.Shared.Enums;
 using PetShelter.Shared.Security;
 using PetShelter.Shared.Services.Contracts;
@@ -57,7 +58,7 @@ namespace PetShelter.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTpes.Role, user.Role.Name)
+                new Claim(ClaimTypes.Role, user.Role.Name)
             };
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
@@ -81,7 +82,7 @@ namespace PetShelter.Controllers
                 return Forbid();
             }
 
-            if (await this.usersService.GetByUsernameAsync(userCreateModel.Username) != default)
+            if (await this.userService.GetByUsernameAsync(userCreateModel.Username) != default)
             {
                 return BadRequest(Constants.UserAlredyExists);
             }
@@ -91,7 +92,7 @@ namespace PetShelter.Controllers
 
             var userDto = this.mapper.Map<UserDto>(userCreateModel);
             userDto.RoleId = (await roleService.GetByNameIfExistsAsync(UserRole.User.ToString()))?.Id;
-            await this.usersService.SaveAsync(userDto);
+            await this.userService.SaveAsync(userDto);
 
             await LoginUser(userDto.Username);
 

@@ -7,29 +7,48 @@ using PetShelter.Shared.Dtos;
 using PetShelter.Shared.Repos.Contracts;
 using PetShelter.Shared.Services.Contracts;
 using PetShelter.ViewModels;
+using System.Runtime.InteropServices;
 
 namespace PetShelter.Controllers
 {
-    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Admin, Employee, User")]
+   
+     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "Admin, Employee, User")]
+
     public class UserController : BaseCrudController<UserDto, IUserRepository, IUserService, UserEditVM, UserDetailsVM>
+
     {
+
         private readonly IRoleService _roleService;
+
         private readonly IShelterService _shelterService;
 
 
-        public UserController(IUserService service, IMapper mapper, IRoleService _roleService, IShelterService _shelterService) : base(service, mapper)
+        public UserController(IUserService service, IMapper mapper, IRoleService roleService, IShelterService shelterService) : base(service, mapper)
+
         {
 
+            _shelterService = shelterService;
+
+            _roleService = roleService;
+
         }
+
         protected override async Task<UserEditVM> PrePopulateVMAsync(UserEditVM editVM)
+
         {
+
             editVM.ShelterList = (await _shelterService.GetAllAsync())
+
             .Select(x => new SelectListItem(x.PetCapacity.ToString(), x.Id.ToString()));
 
             editVM.RoleList = (await _roleService.GetAllAsync())
+
             .Select(x => new SelectListItem(x.Name, x.Id.ToString()));
 
             return editVM;
+
         }
+
     }
+
 }

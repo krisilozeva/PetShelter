@@ -1,4 +1,5 @@
 ﻿using Moq;
+using NUnit.Framework;
 using PetShelter.Data.Entities;
 using PetShelter.Services;
 using PetShelter.Shared.Dtos;
@@ -28,7 +29,7 @@ namespace PetShelter.Test.Service
             var roleDto = new RoleDto()
             {
 
-                Name = "Sharo",
+                Name = "Jake",
 
 
             };
@@ -75,16 +76,15 @@ namespace PetShelter.Test.Service
             var roleDto = new RoleDto()
             {
 
-                Name = "Sharo",
-
+                Name = "Jake",
             };
-            _roleRepositoryMock.Setup(s => s.GetByIdAsync(It.Is<int>(x => x.Equals(roleId))))
+            _roleRepositoryMock.Setup(s => s.GetByIdIfExistsAsync(It.Is<int>(x => x.Equals(roleId))))
                 .ReturnsAsync(roleDto);
             //Act
             var userResult = await _service.GetByIdIfExistsAsync(roleId);
 
             //Assert
-            _roleRepositoryMock.Verify(x => x.GetByIdAsync(roleId), Times.Once);
+            _roleRepositoryMock.Verify(x => x.GetByIdIfExistsAsync(roleId), Times.Once);
             Assert.That(userResult == roleDto);
         }
 
@@ -94,14 +94,14 @@ namespace PetShelter.Test.Service
         public async Task WhenGetByAsync_WithInvalidBreedId_ThenReturnDefault(int roleId)
         {
             var role = (RoleDto)default;
-            _roleRepositoryMock.Setup(s => s.GetByIdAsync(It.Is<int>(x => x.Equals(roleId))))
+            _roleRepositoryMock.Setup(s => s.GetByIdIfExistsAsync(It.Is<int>(x => x.Equals(roleId))))
                 .ReturnsAsync(role);
 
             //Act
             var userResult = await _service.GetByIdIfExistsAsync(roleId);
 
             //Assert
-            _roleRepositoryMock.Verify(x => x.GetByIdAsync(roleId), Times.Once);
+            _roleRepositoryMock.Verify(x => x.GetByIdIfExistsAsync(roleId), Times.Once);
             Assert.That(userResult == role);
 
         }
@@ -112,8 +112,7 @@ namespace PetShelter.Test.Service
             //Arrange
             var roleDto = new RoleDto
             {
-                Name = "Sharo",
-
+                Name = "Jake",
 
             };
             _roleRepositoryMock.Setup(s => s.SaveAsync(It.Is<RoleDto>(x => x.Equals(roleDto))))
