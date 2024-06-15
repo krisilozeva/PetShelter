@@ -11,13 +11,13 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class=" form-horizontal">
+    <div class="form-horizontal">
         <h4>Product</h4>
         <hr />
         @Html.ValidationSummary(true)
 
-        <div class=" form-group">
-            @Html.LabelFor(model => model.Username,new{@class = "control-label col-md-2"})
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Username)
                 @Html.ValidationMessageFor(model => model.Username)
@@ -33,8 +33,9 @@
         </div>
 
         <div class="form-group">
-            <div class="control-label col-md-2">
-                <input type="submit" value="Login" class="btn btn-default"/>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-default" />
+
             </div>
         </div>
     </div>

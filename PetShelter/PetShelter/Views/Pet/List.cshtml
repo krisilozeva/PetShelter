@@ -5,7 +5,8 @@
 @{
     ViewBag.Title = "Index";
 }
-<h2>Index</h2>
+
+<h2>Pet</h2>
 <p>
     @if (Context.User?.FindFirst(ClaimTypes.Role)?.Value == UserRole.Employee.ToString() ||
 
@@ -17,14 +18,9 @@
     {
         @Html.ActionLink("Give Pet", "GivePet")
     }
-
-
-</p>
-<h2>Index</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
+
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -42,13 +38,6 @@
             @Html.DisplayNameFor(model => model.IsEuthanized)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PetTypeId)
-        </th>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.BreedId)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.ShelterId)
         </th>
         <th>Actions</th>
@@ -56,36 +45,33 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayNameFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayNameFor(modelItem => item.Age)
-            </td>
-            <td>
-                @Html.DisplayNameFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayNameFor(modelItem => item.IsAdopted)
-            </td>
-            <td>
-                @Html.DisplayNameFor(modelItem => item.IsEuthanized)
-            </td>
-            <td>
-                @Html.DisplayNameFor(modelItem => item.PetTypeId)
-            </td>
-            <td>
-                @Html.DisplayNameFor(modelItem => item.BreedId)
-            </td>
-            <td>
-                @Html.DisplayNameFor(modelItem => item.ShelterId)
-            </td>
+            <th>
+                @Html.DisplayFor(modelitem => item.Name)
+            </th>
+            <th>
+                @Html.DisplayFor(modelitem => item.Age)
+            </th>
+            <th>
+                @Html.DisplayFor(modelitem => item.Color)
+            </th>
+            <th>
+                @Html.DisplayFor(modelitem => item.IsAdopted)
+            </th>
+            <th>
+                @Html.DisplayFor(modelitem => item.IsEuthanized)
+            </th>
+
+            <th>
+                @Html.DisplayFor(modelitem => item.ShelterId)
+            </th>
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
                 @Html.ActionLink("Adopt Pet", "AdoptPet", new { id = item.Id })|
-                @Html.ActionLink("Vaccinate Pet", "VaccinatePet", new { petId = item.Id })|
+                @Html.ActionLink("Vaccine Pet", "VaccinatePet", new { id = item.Id }) |
+
             </td>
         </tr>
     }

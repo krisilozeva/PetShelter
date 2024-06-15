@@ -28,6 +28,7 @@
             <dd>
                 @Html.DisplayFor(model => model.Address)
             </dd>
+
             <dt>
                 @Html.DisplayNameFor(model => model.Country)
             </dt>
@@ -35,6 +36,7 @@
             <dd>
                 @Html.DisplayFor(model => model.Country)
             </dd>
+
         </dl>
 
         @using (Html.BeginForm())
@@ -44,8 +46,6 @@
             <div class="form-actions no-color">
 
                 <input type="submit" value="Delete" class="btn btn-default" />|
-
-                <input type="submit" value="Delete" class="btn btn-default" /> |
                 @Html.ActionLink("Back to List", "List")
             </div>
         }

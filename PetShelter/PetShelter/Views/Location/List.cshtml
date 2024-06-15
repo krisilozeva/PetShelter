@@ -4,11 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Location</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
+
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.City)
@@ -25,13 +26,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayNameFor(modelItem => item.City)
+                @Html.DisplayFor(modelItem => item.City)
             </td>
             <td>
-                @Html.DisplayNameFor(modelItem => item.Address)
+                @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
-                @Html.DisplayNameFor(modelItem => item.Country)
+                @Html.DisplayFor(modelItem => item.Country)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
@@ -41,3 +42,4 @@
         </tr>
     }
 </table>
+

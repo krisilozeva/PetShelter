@@ -1,17 +1,18 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using PetShelter.Data.Entities;
 using PetShelter.Services;
+using PetShelter.Shared;
 using PetShelter.Shared.Dtos;
 using PetShelter.Shared.Repos.Contracts;
+using PetShelter.Shared.Services;
 using PetShelter.Shared.Services.Contracts;
 using PetShelter.ViewModels;
-using System.Runtime.InteropServices;
+
 using System.Security.Claims;
-using PetShelter.Shared;
-using PetShelter.Data.Entities;
 
 namespace PetShelter.Controllers
 {
