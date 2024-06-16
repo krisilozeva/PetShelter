@@ -130,27 +130,28 @@ namespace PetShelter.Controllers
             }
 
             var model = await this._service.GetByIdIfExistsAsync(id.Value);
+
             if (model == default)
             {
                 return BadRequest(Constants.InvalidId);
             }
-            var mappedModel = _mapper.Map<TEditVM>(model);
+
+            var mappedModel = _mapper.Map<TDetailsVM>(model);
+
             return View(mappedModel);
         }
+
         [HttpPost]
         public virtual async Task<IActionResult> Delete(int id)
         {
-            
             if (!await this._service.ExistsByIdAsync(id))
             {
                 return BadRequest(Constants.InvalidId);
-
             }
+
             await this._service.DeleteAsync(id);
+
             return await List();
-
         }
-        
-
     }
 }

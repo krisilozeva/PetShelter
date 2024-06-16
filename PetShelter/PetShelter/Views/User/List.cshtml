@@ -1,10 +1,8 @@
 ﻿@model IEnumerable<PetShelter.ViewModels.UserDetailsVM>
-
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
+<h2>User</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -14,22 +12,17 @@
             @Html.DisplayNameFor(model => model.Username)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LastName)
         </th>
-
         <th>
-            @Html.DisplayNameFor(model => model.AdoptedPets)
+            @Html.DisplayNameFor(model => model.RoleId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GivenPets)
+            @Html.DisplayNameFor(model => model.ShelterId)
         </th>
-
 
         <th>Actions</th>
     </tr>
@@ -37,30 +30,30 @@
     {
         <tr>
             <td>
-                @Html.DisplayNameFor(modelItem => item.Username)
+                @Html.DisplayFor(modelItem => item.Username)
             </td>
+
             <td>
-                @Html.DisplayNameFor(modelItem => item.Password)
+                @Html.DisplayFor(modelItem => item.FirstName)
             </td>
+
             <td>
-                @Html.DisplayNameFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => item.LastName)
             </td>
+
             <td>
-                @Html.DisplayNameFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => item.RoleId)
             </td>
+
             <td>
-                @Html.DisplayNameFor(modelItem => item.AdoptedPets.Count)
-            </td>
-            <td>
-                @Html.DisplayNameFor(modelItem => item.GivenPets.Count)
+                @Html.DisplayFor(modelItem => item.ShelterId)
             </td>
 
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
 </table>
-}

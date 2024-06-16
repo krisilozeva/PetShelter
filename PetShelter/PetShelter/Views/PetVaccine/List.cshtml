@@ -1,19 +1,20 @@
-﻿@model IEnumerable<PetShelter.ViewModels.ShelterDetailsVM>
+﻿@model IEnumerable<PetShelter.ViewModels.PetVaccineDetailsVM>
+
 @{
     ViewBag.Title = "Index";
 }
-<h2>Shelter</h2>
+
+<h2>Pet Vaccine</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PetCapacity)
+            @Html.DisplayNameFor(model => model.PetId)
         </th>
-
         <th>
-            @Html.DisplayNameFor(model => model.Location.Address)
+            @Html.DisplayNameFor(model => model.VaccineId)
         </th>
 
         <th>Actions</th>
@@ -22,15 +23,16 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PetCapacity)
+                @Html.DisplayNameFor(modelItem => item.PetId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Location.Address)
+                @Html.DisplayNameFor(modelItem => item.VaccineId)
             </td>
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
             </td>
         </tr>
     }

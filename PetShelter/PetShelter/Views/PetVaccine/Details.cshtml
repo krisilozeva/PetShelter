@@ -1,4 +1,4 @@
-﻿@model PetShelter.ViewModels.BreedDetailsVM
+﻿@model PetShelter.ViewModels.PetVaccineDetailsVM
 
 @{
     ViewBag.Title = "Details";
@@ -10,18 +10,20 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Size)
-        </dt>
-        <dt>
-            @Html.DisplayFor(model => model.Size)
+            @Html.DisplayNameFor(model => model.PetId)
         </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.PetId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VaccineId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VaccineId)
+        </dd>
     </dl>
 </div>
 <p>

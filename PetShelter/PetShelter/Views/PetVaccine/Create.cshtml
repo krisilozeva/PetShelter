@@ -1,11 +1,9 @@
 ﻿@using PetShelter.Controllers
 @using PetShelter.Shared.Extensions
-@model PetShelter.ViewModels.VaccineEditVM
+@model PetShelter.ViewModels.PetVaccineEditVM
 
 @{
-
     ViewBag.Title = "Create";
-
 }
 
 <h2>Create</h2>
@@ -17,36 +15,27 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
         <h4>Product</h4>
-
         <hr />
-
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-
+            @Html.LabelFor(model => model.PetId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
-                @Html.EditorFor(model => model.Name)
-
-                @Html.ValidationMessageFor(model => model.Name)
-
+                @Html.DropDownListFor(model => model.PetId, Model.PetList, "Choose a pet ...",
+                         new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PetId)
             </div>
-
         </div>
 
         <div class="form-group">
-
-            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
-
+            @Html.LabelFor(model => model.VaccineId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
-                @Html.EditorFor(model => model.Description)
-
-                @Html.ValidationMessageFor(model => model.Description)
+                @Html.DropDownListFor(model => model.VaccineId, Model.VaccineList, "Choose a vaccine...",
+                         new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VaccineId)
             </div>
         </div>
 
@@ -57,8 +46,7 @@
         </div>
     </div>
 }
+
 <div>
-
     @Html.ActionLink("Back to List", "List")
-
 </div>

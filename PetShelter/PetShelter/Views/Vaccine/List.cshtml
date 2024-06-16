@@ -1,10 +1,8 @@
 ﻿@model IEnumerable<PetShelter.ViewModels.VaccineDetailsVM>
-
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
+<h2>Vaccine</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -16,9 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PetVaccines)
-        </th>
 
         <th>Actions</th>
     </tr>
@@ -26,21 +21,16 @@
     {
         <tr>
             <td>
-                @Html.DisplayNameFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayNameFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td>
-                @Html.DisplayNameFor(modelItem => item.PetVaccines.Count)
-            </td>
-
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
 </table>
-}
